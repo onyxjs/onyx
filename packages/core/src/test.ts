@@ -3,7 +3,7 @@ import Runnable, { isRunnable, RunnableOptions, RunnableTypes } from './runnable
 import { RunOptions } from './runner'
 import Suite from './suite'
 
-export type TestFn = () => (void | Promise<any>)
+export type TestFn = () => (void | Promise<any>) 
 
 /**
  * @description Checks if the passed `Runnable` value is a `Test` instance.
@@ -35,22 +35,18 @@ export default class Test extends Runnable {
     this.doStart()
 
     if (options && options.timeout) {
-      let timeoutID: NodeJS.Timeout
-      const test: Promise<void> = new Promise(async (resolve, reject) => {
-        timeoutID = setTimeout(() => {
-          reject(`${this.getFullDescription()} has timed out: ${options.timeout}ms`)
-        }, options.timeout as number)
+      let timer: NodeJS.Timeout
+      const wait = (ms: number) => new Promise(resolve => {
+        timer = setTimeout(resolve, ms)
+      }) 
 
-        try {
-          await this.fn()
-        } catch (error) {
-          clearTimeout(timeoutID)
-          reject(error)
-        }
-
-        clearTimeout(timeoutID)
-        resolve()
-      })
+      const test = Promise.race([
+        wait(options.timeout).then(() => {
+          clearTimeout(timer)
+          throw new Error(`${this.getFullDescription()} has timed out: ${options.timeout}ms`)
+        }),
+        this.fn(),
+      ])
 
       try {
         await test
@@ -61,7 +57,7 @@ export default class Test extends Runnable {
       return this.doPass()
     } else {
       try {
-        this.fn()
+        await this.fn()
       } catch (error) {
         return this.doFail(error)
       }

@@ -25,8 +25,9 @@ export interface SuiteStats {
 }
 
 export class BailError extends Error {
+  /* istanbul ignore next */
   constructor(message: string) {
-    super(message) /* istanbul ignore next */
+    super(message)
     this.name = 'BailError'
   }
 }
@@ -104,16 +105,14 @@ export default class Suite extends Runnable {
     const promises: Array<Promise<void | Result>> = []
     for (const child of this.children) {
       promises.push((async () => {
-          await this.invokeHook('beforeEach')
-          const result = await child.run()
-          this.result.addMessages(...result.messages.map((m) => `${child.description}: ${m}`))
-          await this.invokeHook('afterEach')
+        await this.invokeHook('beforeEach')
+        const result = await child.run()
+        this.result.addMessages(...result.messages.map((m) => `${child.description}: ${m}`))
+        await this.invokeHook('afterEach')
 
-          if (result.status === Status.Failed) {
-            ++this.failed
-          }
+        if (result.status === Status.Failed) ++this.failed
 
-          return result
+        return result
       })())
     }
 
@@ -121,8 +120,8 @@ export default class Suite extends Runnable {
       for (const promise of promises) {
         try {
           const result = await promise
-
-          if (options.bail && result !== undefined) {
+          
+          if (options.bail && result) {
             throw new BailError(result.messages[0])
           }
         } catch (error) {
@@ -135,7 +134,7 @@ export default class Suite extends Runnable {
         await Promise.all(promises.map(async (promise) => {
           const result = await promise
 
-          if (options && options.bail && result !== undefined) {
+          if (options && options.bail && result) {
             throw new BailError(result.messages[0])
           }
         }))

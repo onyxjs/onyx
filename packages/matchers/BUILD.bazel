@@ -1,0 +1,24 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "pkg_npm")
+load("//tools:index.bzl", "ts_project")
+
+ts_project(
+    name = "matchers",
+    srcs = glob(["src/**/*.ts"]),
+    tsconfig = "//:tsconfig.json",
+)
+
+js_library(
+    name = "lib",
+    package_name = "@onyx/matchers",
+    srcs = ["package.json"],
+    visibility = ["//:__subpackages__"],
+    deps = [":matchers"],
+)
+
+pkg_npm(
+    name = "pkg",
+    package_name = "@onyx/matchers",
+    srcs = ["package.json"],
+    tgz = "onyx_matchers.tgz",
+    deps = [":matchers"],
+)

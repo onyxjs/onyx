@@ -1,0 +1,29 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - 'master'
+      - '**'
+
+jobs:
+  build: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Test package
+        run: yarn bazel:test
+      - name: Build package
+        run: yarn bazel:build
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Test package
+        run: yarn bazel:test
+      - name: Build package
+        run: yarn bazel:build

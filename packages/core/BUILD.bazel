@@ -1,0 +1,31 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "pkg_npm")
+load("//tools:index.bzl", "jest_test", "ts_project")
+
+jest_test(
+    name = "core-test",
+    srcs = glob(["test/**/*.spec.ts"]),
+    config_file = "//:jest.config.js",
+    deps = ["//:tsconfig.json"],
+)
+
+ts_project(
+    name = "core",
+    srcs = glob(["src/**/*.ts"]),
+    tsconfig = "//:tsconfig.json",
+)
+
+js_library(
+    name = "lib",
+    package_name = "@onyx/core",
+    srcs = ["package.json"],
+    visibility = ["//:__subpackages__"],
+    deps = [":core"],
+)
+
+pkg_npm(
+    name = "pkg",
+    package_name = "@onyx/core",
+    srcs = ["package.json"],
+    tgz = "onyx_core.tgz",
+    deps = [":core"],
+)

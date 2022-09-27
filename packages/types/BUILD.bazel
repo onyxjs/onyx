@@ -1,0 +1,7 @@
+load("//tools:index.bzl", "ts_project")
+
+ts_project(
+    name = "@onyx/types",
+    srcs = glob(["src/**/*.ts"]),
+    tsconfig = "//:tsconfig.json",
+)

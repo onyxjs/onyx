@@ -1,0 +1,25 @@
+{
+  "name": "@onyx/types",
+  "version": "0.0.0",
+  "description": "Onyx types",
+  "main": "dist/index.js",
+  "repository": "git@github.com:onyxjs/onyx.git",
+  "author": "Elijah Kotyluk <elijah@elijahkotyluk.com>",
+  "license": "MIT",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ignore-path ../../.eslintignore --ext ts --ext js",
+    "lint:fix": "eslint . --ignore-path ../../.eslintignore --ext ts --ext js --fix",
+    "test": "jest -c jest.config.js",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.5"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1"
+  }
+}

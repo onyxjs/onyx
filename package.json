@@ -8,31 +8,34 @@
   "private": true,
   "workspaces": {
     "packages": [
-        "./packages/*"
+      "./packages/*"
     ]
-},
+  },
   "scripts": {
-    "bazel:format": "find . -type f \\( -name \"*.bzl\" -or -name WORKSPACE -or -name BUILD -or -name BUILD.bazel \\) ! -path \"*/node_modules/*\" | xargs buildifier -v --warnings=attr-cfg,attr-license,attr-non-empty,attr-output-default,attr-single-file,constant-glob,ctx-actions,ctx-args,depset-iteration,depset-union,dict-concatenation,duplicated-name,filetype,git-repository,http-archive,integer-division,load,load-on-top,native-build,native-package,out-of-order-load,output-group,package-name,package-on-top,positional-args,redefined-variable,repository-name,same-origin-load,string-iteration,unsorted-dict-items,unused-variable",  
-    "bazel:lint": "yarn bazel:format --lint=warn",  
+    "bazel:format": "find . -type f \\( -name \"*.bzl\" -or -name WORKSPACE -or -name BUILD -or -name BUILD.bazel \\) ! -path \"*/node_modules/*\" | xargs buildifier -v --warnings=attr-cfg,attr-license,attr-non-empty,attr-output-default,attr-single-file,constant-glob,ctx-actions,ctx-args,depset-iteration,depset-union,dict-concatenation,duplicated-name,filetype,git-repository,http-archive,integer-division,load,load-on-top,native-build,native-package,out-of-order-load,output-group,package-name,package-on-top,positional-args,redefined-variable,repository-name,same-origin-load,string-iteration,unsorted-dict-items,unused-variable",
+    "bazel:lint": "yarn bazel:format --lint=warn",
     "bazel:lint-fix": "yarn bazel:format --lint=fix",
     "bazel:build": "bazel build //...",
     "bazel:test": "bazel test //...",
     "lint": "eslint . --ignore-path .eslintignore --ext ts --ext js",
     "lint:fix": "eslint . --ignore-path .eslintignore --ext ts --ext js --fix",
     "test": "jest -c jest.config.js",
-    "build": "tsc"
+    "build": "tsc",
+    "setup": "bazel run -- @pnpm//:pnpm -C $PWD i"
   },
   "devDependencies": {
     "@bazel/bazelisk": "latest",
     "@bazel/buildifier": "latest",
     "@bazel/ibazel": "latest",
-    "@bazel/typescript": "latest",
+    "@jest/types": "^29.2.1",
     "@types/jest": "^27.0.0",
+    "@types/node": "^18.11.3",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "eslint": "^7.32.0",
     "husky": "^7.0.1",
-    "jest": "^27.0.6",
+    "jest": "^27.5.1",
+    "jest-cli": "^28.0.1",
     "lint-staged": "^11.1.2",
     "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"

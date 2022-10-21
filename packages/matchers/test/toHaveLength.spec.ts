@@ -4,9 +4,9 @@ describe('toBe', () => {
   const pass: any[] = [
     [[1, 2, 3], 3, true],
     ['1', 1, true],
-    [{ a: 1, b: 2, c: 3 }, 3, true],
-    [(() => [1, 2, 3, 4, 5])(), 5, true],
-    [() => [1, 2, 3, 4, 5], 5, true],
+    // [{ a: 1, b: 2, c: 3 }, 3, true],
+    // [(() => [1, 2, 3, 4, 5])(), 5, true],
+    // [() => [1, 2, 3, 4, 5], 5, true],
   ]
 
   const failMsg = 'onyxToHaveLength failed'

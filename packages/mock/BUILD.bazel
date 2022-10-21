@@ -9,12 +9,12 @@ ts_project(
     name = "tsconfig",
     srcs = glob(
         include = ["src/**/*.ts"],
-        exclude = ["test/**/*.spec.ts"],
-    )
+        exclude = ["src/**/*.spec.ts"],
+    ),
 )
 
 npm_package(
-    name = "matchers",
+    name = "mock",
     srcs = [
         "package.json",
         ":tsconfig",
@@ -24,7 +24,7 @@ npm_package(
 
 ts_project(
     name = "tsconfig_test",
-    srcs = glob(["test/**/*.spec.ts"]),
+    srcs = glob(["**/*.spec.ts"]),
     deps = [
         ":tsconfig",
         "//:node_modules/@types/jest",

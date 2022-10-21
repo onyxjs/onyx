@@ -1,31 +1,40 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "pkg_npm")
-load("//tools:index.bzl", "jest_test", "ts_project")
+load("//tools:index.bzl", "ts_project")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 
-jest_test(
-    name = "core-test",
-    srcs = glob(["test/**/*.spec.ts"]),
-    config_file = "//:jest.config.js",
-    deps = ["//:tsconfig.json"],
+npm_link_all_packages(name = "node_modules")
+
+ts_project(
+    name = "tsconfig",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = ["test/**/*.spec.ts"],
+    ),
+)
+
+npm_package(
+    name = "core",
+    srcs = [
+        "package.json",
+        "//:tsconfig",
+    ],
+    visibility = ["//visibility:public"],
 )
 
 ts_project(
-    name = "core",
-    srcs = glob(["src/**/*.ts"]),
-    tsconfig = "//:tsconfig.json",
+    name = "tsconfig_test",
+    srcs = glob(["**/*.spec.ts"]),
+    deps = [
+        ":tsconfig",
+        "//:node_modules/@types/jest",
+        "//:node_modules/jest",
+        "//:node_modules/ts-jest",
+    ],
 )
 
-js_library(
-    name = "lib",
-    package_name = "@onyx/core",
-    srcs = ["package.json"],
-    visibility = ["//:__subpackages__"],
-    deps = [":core"],
-)
-
-pkg_npm(
-    name = "pkg",
-    package_name = "@onyx/core",
-    srcs = ["package.json"],
-    tgz = "onyx_core.tgz",
-    deps = [":core"],
+jest_test(
+    name = "unit",
+    config = "//:jest_config",
+    data = [":tsconfig_test"],
 )

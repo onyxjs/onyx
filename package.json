@@ -20,7 +20,6 @@
     "lint": "eslint . -c ./.eslintrc.js --ignore-path .eslintignore --ext ts --ext js",
     "lint:fix": "eslint . -c ./.eslintrc.js --ignore-path .eslintignore --ext ts --ext js --fix",
     "test": "jest -c jest.config.js",
-    "build": "tsc",
     "setup:deps": "bazel run -- @pnpm//:pnpm -C $PWD i"
   },
   "devDependencies": {

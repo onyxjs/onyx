@@ -7,23 +7,53 @@ on: # rebuild any PRs and main branch changes
       - '**'
 
 jobs:
+  format: # make sure files are linted and formatted correctly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint Bazel
+        run: pnpm bazel:lint
+
+      - name: Lint JavaScript && TypeScript
+        run: pnpm lint
+
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install modules
-        run: yarn
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Test package
-        run: yarn bazel:test
+        run: pnpm bazel:test
+
       - name: Build package
-        run: yarn bazel:build
+        run: pnpm bazel:build
+
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install modules
-        run: yarn
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Test package
-        run: yarn bazel:test
+        run: pnpm bazel:test
+
       - name: Build package
-        run: yarn bazel:build
+        run: pnpm bazel:build

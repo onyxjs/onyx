@@ -5,5 +5,5 @@ export default function toHaveLength (actual: any, expected: number): boolean {
   if (!actual || typeof actual === 'boolean') return false
   // else if (typeof actual === 'function') { console.log('function'); return actual().length === expected}
   // else if (typeof actual === 'object') { console.log('object'); return Object.keys(expected).length === expected}
-  else return actual.length === expected
+  else return (actual as any[]).length === expected
 }

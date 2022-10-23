@@ -50,11 +50,13 @@ export function expectations<M extends AnyMatchers = AnyMatchers>(
     .map(([key, value]) => [
       key,
       (...args: any[]): boolean => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         const result = value(expectation, ...args)
         if (result === not) { throw new ExpectError(`${not ? 'not.' : ''}${key} failed`) } // TODO diff
         return result
       },
     ])
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment
   return Object.assign({}, ...Array.from(entries, ([k, v]: any[]) => ({[k]: v}) ))
 }
 

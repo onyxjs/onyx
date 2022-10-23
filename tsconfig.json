@@ -11,6 +11,11 @@
     "strict": true,
     "target": "es5",
   },
+  "types": [
+    "@jest/types",
+    "@types/jest",
+    "@types/node"
+  ],
   "exclude": [
     "node_modules"
   ],

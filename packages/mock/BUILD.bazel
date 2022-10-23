@@ -9,15 +9,15 @@ ts_project(
     name = "tsconfig",
     srcs = glob(
         include = ["src/**/*.ts"],
-        exclude = ["test/**/*.spec.ts"],
+        exclude = ["src/**/*.spec.ts"],
     ),
 )
 
 npm_package(
-    name = "core",
+    name = "mock",
     srcs = [
         "package.json",
-        "//:tsconfig",
+        ":tsconfig",
     ],
     visibility = ["//visibility:public"],
 )

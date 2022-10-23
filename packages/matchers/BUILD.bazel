@@ -1,24 +1,40 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "pkg_npm")
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 load("//tools:index.bzl", "ts_project")
 
+npm_link_all_packages(name = "node_modules")
+
 ts_project(
+    name = "tsconfig",
+    srcs = glob(
+        include = ["src/**/*.ts"],
+        exclude = ["test/**/*.spec.ts"],
+    ),
+)
+
+npm_package(
     name = "matchers",
-    srcs = glob(["src/**/*.ts"]),
-    tsconfig = "//:tsconfig.json",
+    srcs = [
+        "package.json",
+        ":tsconfig",
+    ],
+    visibility = ["//visibility:public"],
 )
 
-js_library(
-    name = "lib",
-    package_name = "@onyx/matchers",
-    srcs = ["package.json"],
-    visibility = ["//:__subpackages__"],
-    deps = [":matchers"],
+ts_project(
+    name = "tsconfig_test",
+    srcs = glob(["test/**/*.spec.ts"]),
+    deps = [
+        ":tsconfig",
+        "//:node_modules/@types/jest",
+        "//:node_modules/jest",
+        "//:node_modules/ts-jest",
+    ],
 )
 
-pkg_npm(
-    name = "pkg",
-    package_name = "@onyx/matchers",
-    srcs = ["package.json"],
-    tgz = "onyx_matchers.tgz",
-    deps = [":matchers"],
+jest_test(
+    name = "unit",
+    config = "//:jest_config",
+    data = [":tsconfig_test"],
 )

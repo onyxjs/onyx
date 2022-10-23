@@ -4,9 +4,9 @@ describe('toBe', () => {
   const pass: any[] = [
     [[1, 2, 3], 3, true],
     ['1', 1, true],
-    [{ a: 1, b: 2, c: 3 }, 3, true],
-    [(() => [1, 2, 3, 4, 5])(), 5, true],
-    [() => [1, 2, 3, 4, 5], 5, true],
+    // [{ a: 1, b: 2, c: 3 }, 3, true],
+    // [(() => [1, 2, 3, 4, 5])(), 5, true],
+    // [() => [1, 2, 3, 4, 5], 5, true],
   ]
 
   const failMsg = 'onyxToHaveLength failed'
@@ -20,13 +20,11 @@ describe('toBe', () => {
     [{}, {}, failMsg],
   ]
   
-  test.each(pass)
-  ('toHaveLength(%p, %p) should return true', (a, b, expected) => {
+  test.each(pass)('toHaveLength(%p, %p) should return true', (a, b: number, expected) => {
     expect(onyxExpect(a).onyxToHaveLength(b)).toBe(expected)
   })
 
-  test.each(fail)
-  ('toHaveLength(%p, %p) should throw an expect error', (a, b, expected) => {
+  test.each(fail)('toHaveLength(%p, %p) should throw an expect error', (a, b: number, expected: string) => {
     expect(() => onyxExpect(a).onyxToHaveLength(b)).toThrowError(expected)
   })
 })

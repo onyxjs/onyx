@@ -47,4 +47,3 @@ def _jest(name, data, test, tsconfig = "//:tsconfig", jest_config = "//:jest_con
             args = args,
             **kwargs
         )
-        

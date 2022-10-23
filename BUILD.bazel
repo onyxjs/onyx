@@ -22,6 +22,6 @@ ts_project(
     srcs = ["jest.config.ts"],
     tsconfig = {},
     deps = [
-        "//:node_modules/@jest/types"
+        "//:node_modules/@jest/types",
     ],
 )

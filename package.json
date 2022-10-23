@@ -17,11 +17,11 @@
     "bazel:lint-fix": "yarn bazel:format --lint=fix",
     "bazel:build": "bazel build //...",
     "bazel:test": "bazel test //...",
-    "lint": "eslint . --ignore-path .eslintignore --ext ts --ext js",
-    "lint:fix": "eslint . --ignore-path .eslintignore --ext ts --ext js --fix",
+    "lint": "eslint . -c ./.eslintrc.js --ignore-path .eslintignore --ext ts --ext js",
+    "lint:fix": "eslint . -c ./.eslintrc.js --ignore-path .eslintignore --ext ts --ext js --fix",
     "test": "jest -c jest.config.js",
     "build": "tsc",
-    "setup": "bazel run -- @pnpm//:pnpm -C $PWD i"
+    "setup:deps": "bazel run -- @pnpm//:pnpm -C $PWD i"
   },
   "devDependencies": {
     "@bazel/bazelisk": "latest",
@@ -30,9 +30,9 @@
     "@jest/types": "^29.2.1",
     "@types/jest": "^27.0.0",
     "@types/node": "^18.11.3",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.26.0",
     "husky": "^7.0.1",
     "jest": "^27.5.1",
     "jest-cli": "^28.0.1",

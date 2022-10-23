@@ -34,5 +34,5 @@ def ts_project(srcs, name = "tsconfig", tsconfig = "//:tsconfig", deps = [], dat
         source_map = True,
         tsconfig = tsconfig,
         deps = all_deps,
-        **kwargs,
+        **kwargs
     )

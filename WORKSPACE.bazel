@@ -6,27 +6,33 @@ workspace(
 )
 
 load("//tools:deps.bzl", "fetch_build_bazel_rules_nodejs")
+
 fetch_build_bazel_rules_nodejs()
 
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
+
 rules_js_dependencies()
 
 load("@aspect_rules_ts//ts:repositories.bzl", "LATEST_VERSION", "rules_ts_dependencies")
+
 rules_ts_dependencies(ts_version = LATEST_VERSION)
 
 load("@aspect_rules_jest//jest:repositories.bzl", "jest_repositories", JEST_LATEST_VERSION = "LATEST_VERSION")
+
 jest_repositories(
     name = "jest",
     jest_version = JEST_LATEST_VERSION,
 )
 
 load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
+
 nodejs_register_toolchains(
     name = "nodejs",
     node_version = DEFAULT_NODE_VERSION,
 )
 
 load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
+
 npm_translate_lock(
     name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
@@ -34,4 +40,5 @@ npm_translate_lock(
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")
+
 npm_repositories()

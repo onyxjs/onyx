@@ -19,6 +19,9 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
+      rules: {
+        "@typescript-eslint/no-namespace": "off"
+      }
     },
   ],
   settings: {
@@ -31,5 +34,8 @@ module.exports = {
     'import/resolver': {
       'typescript': {}
     }
+  },
+  rules: {
+    "@typescript-eslint/no-namespace": "off"
   }
 }

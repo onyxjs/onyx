@@ -19,13 +19,11 @@ describe('toBe', () => {
     [{}, {}, failMsg],
   ]
   
-  test.each(pass)
-  ('toBe(%p, %p) should return true', (a, b, expected) => {
+  test.each(pass)('toBe(%p, %p) should return true', (a, b, expected) => {
     expect(onyxExpect(a).onyxToBe(b)).toBe(expected)
   })
 
-  test.each(fail)
-  ('toBe(%p, %p) should throw an expect error', (a, b, expected) => {
+  test.each(fail)('toBe(%p, %p) should throw an expect error', (a, b, expected: string) => {
     expect(() => onyxExpect(a).onyxToBe(b)).toThrowError(expected)
   })
 })

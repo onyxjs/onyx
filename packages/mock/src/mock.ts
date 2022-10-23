@@ -11,11 +11,12 @@ export interface Mock extends Function {
 export default function mock(fn: ((...args: any[]) => any), cb?: (args: any[], result: any) => any): Mock {
   const instance = ((...args: any[]) => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment
       const result = fn(...args)
       if (cb) { cb(args, result) }
       instance.calls.push(args)
       instance.returns.push(result)
-      return result
+      return result as Mock
     } catch (e) {
       instance.errors.push(e)
       throw e

@@ -54,7 +54,7 @@ describe('Mock function', () => {
     })
 
     const fn = (a: any, b: number) => {
-      if (typeof a !== typeof b) { throw Error() }
+      if (typeof a !== 'number') { throw Error() }
 
       return a + b
     }

@@ -20,13 +20,11 @@ describe('toBe', () => {
     [{}, {}, failMsg],
   ]
   
-  test.each(pass)
-  ('toHaveLength(%p, %p) should return true', (a, b, expected) => {
+  test.each(pass)('toHaveLength(%p, %p) should return true', (a, b: number, expected) => {
     expect(onyxExpect(a).onyxToHaveLength(b)).toBe(expected)
   })
 
-  test.each(fail)
-  ('toHaveLength(%p, %p) should throw an expect error', (a, b, expected) => {
+  test.each(fail)('toHaveLength(%p, %p) should throw an expect error', (a, b: number, expected: string) => {
     expect(() => onyxExpect(a).onyxToHaveLength(b)).toThrowError(expected)
   })
 })

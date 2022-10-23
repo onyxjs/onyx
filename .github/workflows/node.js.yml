@@ -15,12 +15,6 @@ jobs:
         with:
           version: 7
 
-      - name: Lint Bazel
-        run: pnpm bazel:lint
-
-      - name: Lint Bazel
-        run: pnpm bazel:lint
-
       - name: Lint JavaScript && TypeScript
         run: pnpm lint
 

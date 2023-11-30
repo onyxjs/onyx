@@ -37,4 +37,5 @@ jest_test(
     name = "unit",
     config = "//:jest_config",
     data = [":tsconfig_test"],
+    node_modules = "//:node_modules",
 )

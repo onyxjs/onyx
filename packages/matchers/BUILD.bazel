@@ -30,11 +30,14 @@ ts_project(
         "//:node_modules/@types/jest",
         "//:node_modules/jest",
         "//:node_modules/ts-jest",
+        "//:node_modules/jest-cli",
+        "//:node_modules/jest-junit",
     ],
 )
 
 jest_test(
     name = "unit",
     config = "//:jest_config",
-    data = [":tsconfig_test"],
+    data = [":tsconfig_test", "//:node_modules/@types/node"],
+    node_modules = "//:node_modules",
 )

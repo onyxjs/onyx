@@ -20,7 +20,8 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
       rules: {
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/ban-types": "off",
       }
     },
   ],

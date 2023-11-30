@@ -1,11 +1,11 @@
 // Matchers
-import { matchers, AnyMatchers, onyx } from './matchers'
+import { matchers, AnyMatchers, BuiltInMatchers, onyx, _Matchers } from './matchers'
 
 type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => infer R ? (...args: P) => R : never
 
-type Expectations<M extends AnyMatchers> = { [K in keyof M]: OmitFirstArg<M[K]> }
+type Expectations<M extends BuiltInMatchers> = { [K in keyof M]: OmitFirstArg<M[K]> }
 
-export type NegatedExpectations<M extends AnyMatchers> = Expectations<M> & {
+export type NegatedExpectations<M extends onyx.Matchers> = Expectations<M> & {
   not: Expectations<M>
 }
 
@@ -41,32 +41,33 @@ interface IExpectPass<P> {
 
 type ExpectationResult<F, P> = IExpectFail<F> | IExpectPass<P>
 
-export function expectations<M extends AnyMatchers = AnyMatchers>(
+export function expectations<M extends _Matchers>(
   currentMatchers: M,
-  expectation: any,
+  expectation: unknown,
   not = false,
 ): Expectations<M> {
-  const entries = Object.entries(currentMatchers)
-    .map(([key, value]) => [
-      key,
-      (...args: any[]): boolean => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        const result = value(expectation, ...args)
-        if (result === not) { throw new ExpectError(`${not ? 'not.' : ''}${key} failed`) } // TODO diff
-        return result
-      },
-    ])
+   const entries = Object.entries(currentMatchers)
+       .map(([key, value]) => [
+         key,
+       (...args: any[]): boolean => {
+         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+       (...args: unknown[]): boolean => {
+           const result = value(expectation, ...args)
+           if (result === not) { throw new ExpectError(`${not ? 'not.' : ''}${key} failed`) } // TODO diff
+           return result
+         },
+       ])
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment
   return Object.assign({}, ...Array.from(entries, ([k, v]: any[]) => ({[k]: v}) ))
 }
 
 
-export function expect<M extends onyx.Matchers> (
-  expectation: any,
+export function expect<M extends _Matchers> (
+  expectation: unknown,
 ): NegatedExpectations<M> {
   return {
-      ...expectations<M>(matchers as M, expectation, false),
-      not: expectations<M>(matchers as M, expectation, true),
+      ...expectations<M>(matchers, expectation, false),
+      not: expectations<M>(matchers, expectation, true),
     }
 }
 

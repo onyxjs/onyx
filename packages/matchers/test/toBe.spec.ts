@@ -1,29 +1,27 @@
-import { expect as onyxExpect } from '../src/Expectation'
+import toBe from '../src/toBe'
 
 describe('toBe', () => {
-  const pass: any[] = [
-    [1, 1, true],
-    ['1', '1', true],
-    [null, null, true],
-    [undefined, undefined, true],
-  ]
-
-  const failMsg = 'onyxToBe failed'
-
-  const fail: any[] = [
-    ['1', 1, failMsg],
-    [{ a: 1 }, { b: 2 }, failMsg],
-    [{ a: 1 }, { a: 1 }, failMsg],
-    [[1, 2], [2, 3], failMsg],
-    [[], [], failMsg],
-    [{}, {}, failMsg],
-  ]
-  
-  test.each(pass)('toBe(%p, %p) should return true', (a, b, expected) => {
-    expect(onyxExpect(a).onyxToBe(b)).toBe(expected)
+  it('should match simple values', () => {
+    expect(toBe(1, 1)).toBeTruthy()
+    expect(toBe('onyx', 'onyx')).toBeTruthy()
+    expect(toBe(0, 0)).toBeTruthy()
+    expect(toBe(0, -1)).toBeFalsy()
   })
 
-  test.each(fail)('toBe(%p, %p) should throw an expect error', (a, b, expected: string) => {
-    expect(() => onyxExpect(a).onyxToBe(b)).toThrowError(expected)
+  it('should not match objects', () => {
+    expect(toBe({}, {})).toBeFalsy()
+    expect(toBe({ a: 'b' }, { a: 'b' })).toBeFalsy()
+    expect(toBe({ a: { b: 'c' } }, { a: { b: 'c' } })).toBeFalsy()
+    expect(toBe({}, { a: 'b' })).toBeFalsy()
+    expect(toBe({ a: 'b' }, { a: 'c' })).toBeFalsy()
+  })
+
+  it('should not match NaN', () => {
+    expect(toBe(NaN, NaN)).toBeFalsy()
+    expect(toBe(NaN, 0)).toBeFalsy()
+  })
+
+  it('should differ 0 from -0', () => {
+    expect(toBe(0, -0)).toBeFalsy()
   })
 })

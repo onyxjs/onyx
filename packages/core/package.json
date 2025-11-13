@@ -1,0 +1,13 @@
+{
+  "name": "@onyxjs/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nx echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "elijah kotyluk <elijah@elijahkotyluk.com>",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0"
+}

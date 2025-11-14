@@ -1,0 +1,10 @@
+import { defineProject } from "vitest/config";
+
+export default defineProject({
+  root: ".",
+  test: {
+    name: "core",
+    environment: "node",
+    include: ["test/**/*.test.{ts,tsx}"],
+  },
+});

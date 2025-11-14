@@ -12,7 +12,8 @@
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "pnpm run build",
-    "typecheck": "tsc -p tsconfig.build.json --noEmit"
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "elijah kotyluk <elijah@elijahkotyluk.com>",

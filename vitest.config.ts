@@ -6,6 +6,7 @@ export default defineConfig({
     reporters: ["json"],
     coverage: {
       provider: "v8",
+      include: ['packages/**/src/**/*.{ts}'],
     },
   },
 });

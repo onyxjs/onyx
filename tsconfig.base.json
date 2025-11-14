@@ -1,10 +1,22 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "commonjs",
     "strict": true,
-    "moduleResolution": "NodeNext",
-    "baseUrl": ".",
-    "rootDir": "."
-  }
+    // "moduleResolution": "NodeNext", // Use NodeNext for better ESM support
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noEmitOnError": true,
+    "skipLibCheck": false, // Set to false to enable type checking of declaration files
+    "esModuleInterop": true,
+    "types": [],
+    "jsx": "react",
+    "noEmit": false
+  },
+    "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

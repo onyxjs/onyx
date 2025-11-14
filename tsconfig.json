@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@onyxjs/core/*": ["packages/core/src/*"],
+      "@onyxjs/*": ["packages/*/src"]
+    },
+    "noEmit": true
+  }
+}

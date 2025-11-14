@@ -1,1 +1,1 @@
-console.log('Core package')
+console.log("Core package");

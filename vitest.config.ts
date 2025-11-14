@@ -1,13 +1,11 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    projects: [
-      'packages/*',
-    ],
-    reporters: ['json'],
+    projects: ["packages/*"],
+    reporters: ["json"],
     coverage: {
-        provider: 'v8',
-    }
+      provider: "v8",
+    },
   },
-})
+});

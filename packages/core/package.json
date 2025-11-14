@@ -1,0 +1,25 @@
+{
+  "name": "@onyxjs/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm run clean && pnpm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "elijah kotyluk <elijah@elijahkotyluk.com>",
+  "license": "ISC",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

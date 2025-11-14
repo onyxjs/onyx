@@ -1,16 +1,43 @@
 {
-  "name": "onyx",
+  "name": "onyxjs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "elijah kotyluk <elijah@elijahkotyluk.com>",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@10.20.0",
+  "workspaces": [
+    "packages/*"
+  ],
+    "scripts": {
+    "clean": "pnpm run -r clean",
+    "clean:all": "npx lerna run clean",
+    "build": "pnpm run -r build",
+    "build:all": "npx lerna run build",
+    "test": "pnpm run -r test",
+    "test:all": "npx lerna run test",
+    "typecheck": "pnpm run -r typecheck",
+    "typecheck:all": "npx lerna run typecheck",
+    "lint": "eslint .",
+    "coverage": "vitest run --coverage",
+    "coverage:all": "npx lerna run coverage",
+    "prepare": "husky",
+    "lerna:version": "npx lerna version --no-private",
+    "lerna:publish": "npx lerna publish"
+  },
   "devDependencies": {
-    "typescript": "^5.9.3"
-  }
+    "@eslint/js": "~9.38.0",
+    "@vitest/coverage-v8": "^4.0.9",
+    "eslint": "~9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "~5.5.0",
+    "globals": "~16.4.0",
+    "husky": "^9.1.7",
+    "lerna": "^9.0.1",
+    "prettier": "~3.6.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "~8.46.0",
+    "vitest": "^4.0.9"
+  },
+  "dependencies": {}
 }

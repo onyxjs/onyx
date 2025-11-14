@@ -11,7 +11,8 @@
     "build": "pnpm run clean && pnpm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit"
   },
   "keywords": [],
   "author": "elijah kotyluk <elijah@elijahkotyluk.com>",

@@ -37,7 +37,7 @@ jobs:
       - name: Run Tests
         run: pnpm test:all
 
-      - name: run Coverage
+      - name: Run Coverage
         run: pnpm coverage:all
 
       - name: Run Type Check

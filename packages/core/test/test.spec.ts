@@ -22,7 +22,7 @@ describe("Failing Test Suite", () => {
   });
 });
 
-describe("deepEqual utility", () => {
+describe("toStrictEqual", () => {
   it("should correctly compare complex objects", () => {
     const obj1 = {
       name: "Test",

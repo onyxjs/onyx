@@ -1,7 +1,8 @@
 {
-  "name": "@onyxjs/core",
-  "version": "1.0.0",
+  "name": "@onyx.js/core",
+  "version": "0.0.0-alpha.1.0",
   "description": "",
+  "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +11,7 @@
     "dist",
     "bin"
   ],
-    "exports": {
+  "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
@@ -28,7 +29,7 @@
     "compile": "tsc -p tsconfig.build.json && tsc-esm-fix dist --tsconfig ./tsconfig.build.json",
     "prepublishOnly": "pnpm run build",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
-    "onyx": "node bin/onyx.mjs"
+    "test": "node bin/onyx.mjs"
   },
   "keywords": [],
   "author": "elijah kotyluk <elijah@elijahkotyluk.com>",

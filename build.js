@@ -2,10 +2,8 @@ const esbuild = require("esbuild");
 const path = require("path");
 const fs = require("fs");
 
-// List your packages here
 const packages = [
   "core",
-  // Add more package names as needed
 ];
 
 for (const pkg of packages) {

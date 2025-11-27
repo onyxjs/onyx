@@ -29,8 +29,8 @@ function findOnyxConfig(startDir = rootDir) {
 const configPath = findOnyxConfig();
 
 if (configPath) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const config = await import(configPath);
-  console.log("Config contents:", config.default || config);
 }
 
 await import("../dist/cli.js");

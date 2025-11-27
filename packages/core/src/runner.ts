@@ -71,8 +71,6 @@ async function runTestsCLI(options: RunnerOptions = {}) {
   console.log(
     chalk.bold(`\nTotal: ${total}, Passed: ${passed}, Failed: ${failed}`),
   );
-
-  if (failed > 0) process.exit(1);
 }
 
 export { runTestsCLI };

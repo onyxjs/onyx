@@ -5,6 +5,7 @@
   "keywords": [],
   "author": "elijah kotyluk <elijah@elijahkotyluk.com>",
   "license": "MIT",
+  "private": false,
   "packageManager": "pnpm@10.20.0",
   "workspaces": [
     "packages/*"

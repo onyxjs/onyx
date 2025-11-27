@@ -28,7 +28,6 @@
     "compile": "tsc -p tsconfig.build.json && tsc-esm-fix dist --tsconfig ./tsconfig.build.json",
     "prepublishOnly": "pnpm run build",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
-    "test": "vitest run",
     "onyx": "node bin/onyx.mjs"
   },
   "keywords": [],

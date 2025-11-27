@@ -1,33 +1,27 @@
+import { TaskStatus, type PromisableFn } from "./types";
+
 interface TestTask {
   description: string;
-  fn: () => Promise<void> | void;
+  fn: PromisableFn<void>;
   result?: TestResult;
+  run(): Promise<void>;
 }
 
 interface TestResult {
-  test: Test;
-  status: Extract<TaskStatus, "pass" | "fail" | "skipped">;
+  status: Extract<TaskStatus, "pass" | "fail" | "skipped" | "todo" | "only">;
   error?: Error;
-  duration?: number;
+  durationMs?: number;
 }
 
-enum TaskStatus {
-  Pending = "pending",
-  Running = "running",
-  Pass = "pass",
-  Fail = "fail",
-  Skipped = "skipped",
-}
-
-class Test implements Test {
+class Test implements TestTask {
   description: string;
-  fn: () => Promise<void> | void;
-  state: TaskStatus = TaskStatus.Pending;
+  durationMs: number = 0;
+  fn: PromisableFn<void>;
+  status: TaskStatus = TaskStatus.Pending;
 
-  // parent?: Suite; // @TODO - this should be a reference to the parent once they are created
-  result?: TestResult;
+  error?: Error;
 
-  constructor(description: string, fn: () => Promise<void> | void) {
+  constructor(description: string, fn: PromisableFn<void>) {
     this.description = description;
     this.fn = fn;
   }
@@ -36,23 +30,17 @@ class Test implements Test {
     const start = performance.now();
 
     try {
-      this.state = TaskStatus.Running;
+      this.status = TaskStatus.Running;
       await this.fn();
 
-      this.result = {
-        test: this,
-        status: TaskStatus.Pass,
-        duration: performance.now() - start,
-      };
+      this.status = TaskStatus.Pass;
     } catch (error) {
-      this.result = {
-        test: this,
-        status: TaskStatus.Fail,
-        error: error instanceof Error ? error : new Error(String(error)),
-        duration: performance.now() - start,
-      };
+      this.error = error instanceof Error ? error : new Error(String(error));
+      this.status = TaskStatus.Fail;
+    } finally {
+      this.durationMs = performance.now() - start;
     }
   }
 }
 
-export { Test, type TestResult, type TestTask };
+export { Test, type TestResult, type TestTask, TaskStatus };

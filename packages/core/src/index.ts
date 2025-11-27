@@ -1,1 +1,2 @@
-console.log("Core package");
+export { expect } from "./expect";
+export { describe, it } from "./interface";

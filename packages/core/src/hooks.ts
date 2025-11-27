@@ -1,5 +1,5 @@
 import { getCurrentSuite } from "./suite";
-import { Promisable, PromisableFn } from "./types";
+import { PromisableFn } from "./types";
 
 type HookFn = PromisableFn<void>;
 

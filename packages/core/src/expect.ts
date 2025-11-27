@@ -1,4 +1,9 @@
-import { MatcherContext, MatcherFn, MatcherMap, matcherRegistry } from "./matchers";
+import {
+  MatcherContext,
+  MatcherFn,
+  MatcherMap,
+  matcherRegistry,
+} from "./matchers";
 
 export interface ExpectInterface {
   <T>(value: T): Expectation<T>;
@@ -18,7 +23,7 @@ type Expectation<T> = {
 
 export function extendMatchers(newMatchers: MatcherMap) {
   for (const key in newMatchers) {
-    console.log('key: ', key)
+    console.log("key: ", key);
     matcherRegistry[key] = newMatchers[key];
   }
 }

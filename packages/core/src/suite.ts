@@ -117,16 +117,16 @@ class Suite implements SuiteTask {
   }
 }
 
-export const rootSuite = new Suite("root")
+export const rootSuite = new Suite("root");
 
 export function getCurrentSuite() {
-  return onyxGlobalContext.currentSuite || rootSuite
+  return onyxGlobalContext.currentSuite || rootSuite;
 }
 
 export function clearContext() {
-  onyxGlobalContext.suites.length = 0
-  rootSuite.reset()
-  onyxGlobalContext.currentSuite = rootSuite
+  onyxGlobalContext.suites.length = 0;
+  rootSuite.reset();
+  onyxGlobalContext.currentSuite = rootSuite;
 }
 
 export { Suite };

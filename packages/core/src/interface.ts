@@ -4,7 +4,6 @@ import { Test } from "./test";
 
 import type { PromisableFn } from "./types";
 
-
 function _describe(description: string, fn: PromisableFn<void>) {
   const parent = getCurrentSuite();
   const suite = new Suite(description, parent);

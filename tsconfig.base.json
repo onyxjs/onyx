@@ -1,21 +1,33 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "commonjs",
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "node",
     "strict": true,
-    // "moduleResolution": "NodeNext", // Use NodeNext for better ESM support
     "resolveJsonModule": true,
-    "sourceMap": true,
+    // "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "noEmitOnError": true,
-    "skipLibCheck": false, // Set to false to enable type checking of declaration files
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": [],
-    "jsx": "react",
-    "noEmit": false
+    "types": ["@types/node"],
+    "noEmit": false,
+    "strictNullChecks": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@onyx/*": ["packages/*/src"]
+    },
+    // "moduleDetection": "force",
+    // "isolatedModules": false,
   },
-    "exclude": [
+    "ts-node": {
+    // Tell ts-node CLI to install the --loader automatically, explained below
+    "esm": true
+  },
+  "exclude": [
     "node_modules",
     "dist"
   ]

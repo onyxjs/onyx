@@ -13,6 +13,7 @@ export default tsEslint.config(
       "**/coverage",
       "**/out",
       "**/lib",
+      "build.js",
     ],
   },
   {

@@ -28,19 +28,13 @@ class Suite implements SuiteTask {
   beforeEachHooks: PromisableFn<void>[] = [];
   afterEachHooks: PromisableFn<void>[] = [];
 
-  constructor(description: string, parent?: Suite, fn?: PromisableFn<void>) {
+  constructor(description: string, parent?: Suite) {
     this.description = description;
-    this.suites = [];
-    this.tests = [];
-
     this.parent = parent;
   }
 
   addSuite(suite: Suite) {
-    console.log("this === rootSuite?", this.root);
-    console.log("Adding suite:", suite.description);
     this.suites.push(suite);
-    console.log("After push, suites count:", this.suites.length);
   }
 
   addTest(test: Test) {
@@ -124,7 +118,6 @@ export function getCurrentSuite() {
 }
 
 export function clearContext() {
-  onyxGlobalContext.suites.length = 0;
   rootSuite.reset();
   onyxGlobalContext.currentSuite = rootSuite;
 }

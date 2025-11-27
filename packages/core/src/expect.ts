@@ -23,7 +23,6 @@ type Expectation<T> = {
 
 export function extendMatchers(newMatchers: MatcherMap) {
   for (const key in newMatchers) {
-    console.log("key: ", key);
     matcherRegistry[key] = newMatchers[key];
   }
 }

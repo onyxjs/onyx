@@ -4,21 +4,7 @@ export interface MatcherMap {
   [name: string]: MatcherFn<unknown>;
 }
 
-export const coreMatchers: MatcherMap = {
-  toBe(this, received, expected) {
-    if (this.isNot) {
-      if (received === expected) {
-        throw new Error(`Expected values not to be equal:\n${received}`);
-      }
-    } else {
-      if (received !== expected) {
-        throw new Error(
-          `Expected values to be equal:\n${this.diff(received, expected)}`,
-        );
-      }
-    }
-  },
-};
+export const coreMatchers: MatcherMap = {};
 
 export const matcherRegistry: MatcherMap = { ...coreMatchers };
 

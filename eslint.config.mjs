@@ -13,7 +13,7 @@ export default tsEslint.config(
       "**/coverage",
       "**/out",
       "**/lib",
-      "onyx.mjs",
+      "build.js",
     ],
   },
   {

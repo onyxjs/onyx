@@ -54,6 +54,6 @@ describe("deepEqual utility", () => {
       typedArray: new Uint8Array([1, 2, 3]),
     };
 
-    expect(obj1).toDeepEqual(obj2);
+    expect(obj1).toStrictEqual(obj2);
   });
 });

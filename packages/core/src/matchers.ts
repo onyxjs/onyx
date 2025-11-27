@@ -26,8 +26,11 @@ extendMatchers({
     }
   },
 
-  toDeepEqual<T>(this: MatcherContext, received: T, expected: T) {
-    deepEqual(received, expected);
+  toStrictEqual<T>(this: MatcherContext, received: T, expected: T) {
+    const pass = deepEqual(received, expected);
+    if (this.isNot ? pass : !pass) {
+      throw new Error(`Expected:\n${this.diff(received, expected)}`);
+    }
   },
 });
 

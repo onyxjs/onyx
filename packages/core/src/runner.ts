@@ -4,7 +4,7 @@ import path from "path";
 import chalk from "chalk";
 import { onyxGlobalContext } from "./context";
 import { clearContext, rootSuite } from "./suite";
-import { pathToFileURL } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 
 interface RunnerOptions {
   testDir?: string;
@@ -14,7 +14,7 @@ interface RunnerOptions {
 async function runTestsCLI(options: RunnerOptions = {}) {
   // Always use the source test directory relative to the package root
   const packageRoot = path.resolve(
-    path.dirname(new URL(import.meta.url).pathname),
+    path.dirname(fileURLToPath(import.meta.url)),
     "..",
   );
   const testDir = path.resolve(packageRoot, "test");
@@ -22,10 +22,10 @@ async function runTestsCLI(options: RunnerOptions = {}) {
   // discover test files
   let files = fs
     .readdirSync(testDir)
-    .filter((f) => f.endsWith(".spec.js"))
+    .filter((f) => f.endsWith(".spec.ts"))
     .map((f) => path.join(testDir, f));
 
-  if (options.pattern) files = files.filter((f) => options.pattern!.test(f));
+  if (options.pattern) files = files.filter((f) => options.pattern?.test(f));
 
   for (const file of files) {
     clearContext();

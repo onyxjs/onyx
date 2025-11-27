@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+"use strict";
+
+import { existsSync } from "fs";
+import { dirname, join, resolve } from "path";
+
+const rootDir = resolve(process.cwd());
+
+const CONFIG_BASENAME = "onyx.config";
+const CONFIG_EXTS = [".js", ".ts", ".json", ".mjs", ".cjs"];
+
+function findOnyxConfig(startDir = rootDir) {
+  let dir = startDir;
+
+  while (true) {
+    for (const ext of CONFIG_EXTS) {
+      const configPath = join(dir, CONFIG_BASENAME + ext);
+      if (existsSync(configPath)) return configPath;
+    }
+
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+
+  return null;
+}
+
+const configPath = findOnyxConfig();
+
+if (configPath) {
+  const config = await import(configPath);
+  console.log("Config contents:", config.default || config);
+}
+
+await import("../dist/cli.js");

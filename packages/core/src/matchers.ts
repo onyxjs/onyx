@@ -1,3 +1,4 @@
+import { deepEqual } from "./utils/deepEqual";
 import { extendMatchers } from "./expect";
 
 export interface MatcherMap {
@@ -23,6 +24,10 @@ extendMatchers({
     if (this.isNot ? pass : !pass) {
       throw new Error(`Expected:\n${this.diff(received, expected)}`);
     }
+  },
+
+  toDeepEqual<T>(this: MatcherContext, received: T, expected: T) {
+    deepEqual(received, expected);
   },
 });
 
